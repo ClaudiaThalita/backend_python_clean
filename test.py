@@ -1,2 +1,2 @@
-def start():
-    print('Ola mundo')
+arquivo = open("file.txt", 'r')
+print(arquivo.readline())
