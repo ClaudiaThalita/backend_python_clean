@@ -1,6 +1,6 @@
-from faker import Faker
 from .user_repository import UserRepository
 from src.infra.config import DBConnectionHandler
+from faker import Faker
 from src.infra.entities import Users as UsersModel
 
 faker = Faker()
@@ -19,11 +19,12 @@ def test_insert_user():
     query_user = engine.execute(
         "SELECT * FROM users WHERE id='{}';".format(new_user.id)
     ).fetchone()
-    
+
     engine.execute("DELETE FROM users WHERE id='{}'".format(new_user.id))
     assert new_user.id == query_user.id
     assert new_user.name == query_user.name
     assert new_user.password == query_user.password
+
 
 def test_select_user():
     """ Shoul select a user in Users table and compare it """

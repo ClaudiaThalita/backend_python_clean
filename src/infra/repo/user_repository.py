@@ -29,13 +29,12 @@ class UserRepository(UserRepositoryInterface):
                 db_connection.session.close()
 
         return None
-    
     @classmethod
-    def select_user(cls, user_id:int =None, name:str = None) -> List[Users]:
+    def select_user(cls, user_id: int = None, name: str = None) -> List[Users]:
         """
         Select data in user entity by id and/or name
-        :param  - user_id: Id of the registry
-                -name: User Name
+        :param - user_id: Id of the registry
+               - name: User name
         :return - List with Users selected
         """
 
@@ -43,25 +42,41 @@ class UserRepository(UserRepositoryInterface):
             query_data = None
 
             if user_id and not name:
+
                 with DBConnectionHandler() as db_connection:
-                    data =db_connection.session.query(UsersModel).filter_by(id=user_id).one()
+                    data = (
+                        db_connection.session.query(UsersModel)
+                        .filter_by(id=user_id)
+                        .one()
+                    )
                     query_data = [data]
 
             elif not user_id and name:
-                 with DBConnectionHandler() as db_connection:
-                    data =db_connection.session.query(UsersModel).filter_by(name=name).one()
-                    query_data = [data]
-            
-            elif user_id and name:
+
                 with DBConnectionHandler() as db_connection:
-                    data =db_connection.session.query(UsersModel).filter_by(id=user_id,name=name).one()
+                    data = (
+                        db_connection.session.query(UsersModel)
+                        .filter_by(name=name)
+                        .one()
+                    )
                     query_data = [data]
-            
+
+            elif user_id and name:
+
+                with DBConnectionHandler() as db_connection:
+                    data = (
+                        db_connection.session.query(UsersModel)
+                        .filter_by(id=user_id, name=name)
+                        .one()
+                    )
+                    query_data = [data]
+
             return query_data
+
         except:
             db_connection.session.rollback()
             raise
         finally:
             db_connection.session.close()
-        
+
         return None

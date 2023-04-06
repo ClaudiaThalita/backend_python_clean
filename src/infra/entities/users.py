@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship
 from src.infra.config import Base
 
+
 class Users(Base):
     """ Users Entity """
 
@@ -15,11 +16,12 @@ class Users(Base):
     def __rep__(self):
         return f"Usr [name={self.name}]"
     
+
     def __eq__(self, other):
         if (
-            self.id == other.id 
-            and self.name == other.name 
+            self.id == other.id
+            and self.name == other.name
             and self.password == other.password
-            ):
+        ):
             return True
         return False

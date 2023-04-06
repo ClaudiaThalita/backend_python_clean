@@ -32,7 +32,7 @@ def test_insert_pet():
     assert new_pet.user_id == query_user.user_id
 
     engine.execute("DELETE FROM pets WHERE id='{}';".format(new_pet.id))
-    
+
 def test_select_pet():
     """ Should select a pet in Pets table and compare it """
 

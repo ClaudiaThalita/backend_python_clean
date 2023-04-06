@@ -1,3 +1,4 @@
+# pylint: disable=E1101
 from typing import List
 from src.data.interfaces import PetRepositoryInterface
 from src.domain.models import Pets
@@ -40,7 +41,7 @@ class PetRepository(PetRepositoryInterface):
                 db_connection.session.close()
 
         return None
-    
+
     @classmethod
     def select_pet(cls, pet_id: int = None, user_id: int = None) -> List[Pets]:
         """
