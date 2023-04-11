@@ -21,7 +21,7 @@ class FindUser(FindUserInterface):
         if validate_entry:
             response = self.user_repository.select_user(user_id=user_id)
 
-            return{"Success": validate_entry, "Data": response}
+        return{"Success": validate_entry, "Data": response}
     
     def by_name(self, name: str) -> Dict[bool,List[Users]]:
         """Select User By Name
@@ -35,7 +35,7 @@ class FindUser(FindUserInterface):
         if validate_entry:
             response = self.user_repository.select_user(name=name)
 
-            return{"Success": validate_entry, "Data": response}
+        return{"Success": validate_entry, "Data": response}
         
     def by_id_and_name(self, user_id: int, name: str) -> Dict[bool,List[Users]]:
         """Select User By Name
@@ -50,4 +50,4 @@ class FindUser(FindUserInterface):
         if validate_entry:
             response = self.user_repository.select_user(user_id=user_id,name=name)
 
-            return{"Success": validate_entry, "Data": response}
+        return{"Success": validate_entry, "Data": response}

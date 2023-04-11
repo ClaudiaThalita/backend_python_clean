@@ -60,3 +60,66 @@ def test_by_id_and_name():
 
     assert response["Success"] is True
     assert response["Data"]
+
+def test_register_by_id_fail():
+    """ Testing registry method in fail """
+
+    user_repo = UserRepositorySpy()
+    find_user = FindUser(user_repo)
+
+    attributes = {"id": faker.name()}
+
+    response = find_user.by_id(
+         user_id=attributes["id"]
+    )
+
+    print(response)
+
+    # Testing inputs
+    assert user_repo.insert_user_params == {}
+
+    # Testing outputs
+    assert response["Success"] is False
+    assert response["Data"] is None
+
+def test_register_by_name_fail():
+    """ Testing registry method in fail """
+    
+    user_repo = UserRepositorySpy()
+    find_user = FindUser(user_repo)
+
+    attributes = {"name": faker.random_number(digits=2)}
+
+    response = find_user.by_name(
+        name=attributes["name"]
+    )
+
+    print(response)
+
+    # Testing inputs
+    assert user_repo.insert_user_params == {}
+
+    # Testing outputs
+    assert response["Success"] is False
+    assert response["Data"] is None
+
+def test_register_by_id_and_name_fail():
+    """ Testing registry method in fail """
+    
+    user_repo = UserRepositorySpy()
+    find_user = FindUser(user_repo)
+
+    attributes = {"name": faker.random_number(digits=2), "id": faker.name()}
+
+    response = find_user.by_id_and_name(
+        name=attributes["name"], user_id=attributes["id"]
+    )
+
+    print(response)
+
+    # Testing inputs
+    assert user_repo.insert_user_params == {}
+
+    # Testing outputs
+    assert response["Success"] is False
+    assert response["Data"] is None
