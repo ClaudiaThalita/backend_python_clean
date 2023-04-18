@@ -1,1 +1,1 @@
-from .find_user_controller import FindUserController
+from .register_user_controller import RegisterUserController
